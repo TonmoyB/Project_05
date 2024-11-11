@@ -19,17 +19,10 @@ const makeUserTable = () => {
             <td>${user.email}</td>
             <td>${user.contact}</td>
             <td>
-                <button class="editButton">EDIT</button>
-                <button class="deleteButton">DELETE</button>
+                <button class="editButton" onclick="editUser.call(this, ${index})">EDIT</button>
+                <button class="deleteButton" onclick="deleteUser.call(this, ${index})">DELETE</button>
             </td>
         `;
-
-        const editButton = row.querySelector('.editButton');
-        const deleteButton = row.querySelector('.deleteButton');
-
-        editButton.addEventListener('click', editUser.bind(null, index));
-        deleteButton.addEventListener('click', deleteUser.bind(null, index));
-
         tableBody.appendChild(row);
     });
 };
@@ -43,31 +36,23 @@ const handleFormSubmit = (event) => {
     const userIndex = document.getElementById('user-index').value;
 
     if (name && email && contact) {
-        const user = { name, email, contact };
+        const user = { name, email, contact }
         if (userIndex === '') {
             addUser(user);
         } else {
             updateUser(userIndex, user);
         }
-
         document.getElementById('user-form').reset();
         document.getElementById('user-index').value = '';
         document.getElementById('submit-button').textContent = ' ADD USER ';
     } else {
-        alert("All details are required!");
+        alert("All Details Not Found!!!!");
     }
 };
 
 const addUser = (newUser) => {
     const users = getUserData();
     users.push(newUser);
-    saveUserData(users);
-    makeUserTable();
-};
-
-const updateUser = (index, updatedUser) => {
-    const users = getUserData();
-    users[index] = updatedUser;
     saveUserData(users);
     makeUserTable();
 };
@@ -81,16 +66,23 @@ const editUser = (index) => {
     document.getElementById('contact').value = user.contact;
 
     document.getElementById('user-index').value = index;
-    document.getElementById('submit-button').textContent = ' UPDATE USER ';
+    document.getElementById('submit-button').textContent = ' EDIT USER ';
+};
+
+const updateUser = (index, updatedUser) => {
+    const users = getUserData();
+    users[index] = updatedUser;
+    saveUserData(users);
+    makeUserTable();
 };
 
 const deleteUser = (index) => {
     const users = getUserData();
-    if (confirm('Are you sure you want to delete this user?')) {
+    if (confirm('SURE TO DELETE!!??')) {
         users.splice(index, 1);
         saveUserData(users);
         makeUserTable();
-    };
-}
+    }
+};
 
 makeUserTable();
