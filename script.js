@@ -83,6 +83,7 @@ const deleteUser = (index) => {
         saveUserData(users);
         makeUserTable();
     }
+    document.getElementById('user-form').reset();
 };
 
 makeUserTable();
