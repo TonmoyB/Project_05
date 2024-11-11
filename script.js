@@ -66,7 +66,7 @@ const editUser = (index) => {
     document.getElementById('contact').value = user.contact;
 
     document.getElementById('user-index').value = index;
-    document.getElementById('submit-button').textContent = ' EDIT USER ';
+    document.getElementById('submit-button').textContent = ' UPDATE USER ';
 };
 
 const updateUser = (index, updatedUser) => {
